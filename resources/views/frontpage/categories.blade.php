@@ -8,7 +8,7 @@
             @foreach ($categories as $category)
                 <div class="col-md-4">
                     <a href="/posts?category={{ $category->slug }}">
-                        <div class="card bg-dark text-white">
+                        <div class="card bg-dark text-white mb-3">
                             <img src="https://source.unsplash.com/500x500?{{ $category->name }}" class="card-img"
                                 alt="{{ $category->name }}">
                             <div class="card-img-overlay text-center p-0">
@@ -24,6 +24,6 @@
     </div>
 
     <footer class="blog-footer">
-        <a href="/category">Back to top</a>
+        <a href="/categories">Back to top</a>
     </footer>
 @endsection

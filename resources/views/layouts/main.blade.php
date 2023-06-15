@@ -132,21 +132,23 @@
                                 <a class="nav-link {{ Request::is('categories') ? 'active' : '' }}"
                                     href="/categories">Categories</a>
                             </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    Dashboard
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item {{ Request::is('dashboard') ? 'active' : '' }}"
-                                            href="/dashboard">Posts</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item {{ Request::is('dashboard/posts*') ? 'active' : '' }}"
-                                            href="/dashboard/posts">My Posts</a></li>
-                                </ul>
-                            </li>
+                            @auth
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        Dashboard
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item {{ Request::is('dashboard') ? 'active' : '' }}"
+                                                href="/dashboard">Posts</a></li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li><a class="dropdown-item {{ Request::is('dashboard/posts*') ? 'active' : '' }}"
+                                                href="/dashboard/posts">My Posts</a></li>
+                                    </ul>
+                                </li>
+                            @endauth
                             @can('admin')
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -163,10 +165,6 @@
                             @auth
                                 <li class="nav-item">
                                     <span class="nav-link"> Welcome, {{ auth()->user()->username }}</span>
-                                </li>
-                            @else
-                                <li class="nav-item">
-                                    <span class="nav-link"> Welcome</span>
                                 </li>
                             @endauth
                         </ul>
