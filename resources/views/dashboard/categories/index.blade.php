@@ -27,8 +27,8 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $category->name }} </td>
                         <td>
-                            <a href="/posts?category={{ $category->slug }}" class="badge bg-info"><span
-                                    class="bi bi-eye"></span></a>
+                            <a href="{{ route('category.index', ['category' => $category->slug]) }}"
+                                class="badge bg-info"><span class="bi bi-eye"></span></a>
                             <form action="{{ route('categories.destroy', ['category' => $category->slug]) }}" method="post"
                                 class="d-inline">
                                 @method('delete')

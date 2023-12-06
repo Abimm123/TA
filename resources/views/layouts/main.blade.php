@@ -10,7 +10,7 @@
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/blog/">
 
-    <link rel="stylesheet" href="/assets/css/sig-in.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/sig-in.css') }}">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
@@ -18,93 +18,11 @@
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.0/dist/trix.css">
     <script type="text/javascript" src="https://unpkg.com/trix@2.0.0/dist/trix.umd.min.js"></script>
 
-
-
-    <style>
-        trix-toolbar [data-trix-button-group="file=tools"] {
-            display: none;
-        }
-
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            user-select: none;
-        }
-
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-
-        .b-example-divider {
-            width: 100%;
-            height: 3rem;
-            background-color: rgba(0, 0, 0, .1);
-            border: solid rgba(0, 0, 0, .15);
-            border-width: 1px 0;
-            box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
-        }
-
-        .b-example-vr {
-            flex-shrink: 0;
-            width: 1.5rem;
-            height: 100vh;
-        }
-
-        .bi {
-            vertical-align: -.125em;
-            fill: currentColor;
-        }
-
-        .nav-scroller {
-            position: relative;
-            z-index: 2;
-            height: 2.75rem;
-            overflow-y: hidden;
-        }
-
-        .nav-scroller .nav {
-            display: flex;
-            flex-wrap: nowrap;
-            padding-bottom: 1rem;
-            margin-top: -1px;
-            overflow-x: auto;
-            text-align: center;
-            white-space: nowrap;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .btn-bd-primary {
-            --bd-violet-bg: #712cf9;
-            --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
-
-            --bs-btn-font-weight: 600;
-            --bs-btn-color: var(--bs-white);
-            --bs-btn-bg: var(--bd-violet-bg);
-            --bs-btn-border-color: var(--bd-violet-bg);
-            --bs-btn-hover-color: var(--bs-white);
-            --bs-btn-hover-bg: #6528e0;
-            --bs-btn-hover-border-color: #6528e0;
-            --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
-            --bs-btn-active-color: var(--bs-btn-hover-color);
-            --bs-btn-active-bg: #5a23c8;
-            --bs-btn-active-border-color: #5a23c8;
-        }
-
-        .bd-mode-toggle {
-            z-index: 1500;
-        }
-    </style>
-
-
     <!-- Custom styles for this template -->
     <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
     <!-- Custom styles for this template -->
-    <link href="/assets/css/blog.css" rel="stylesheet">
-    <link href="/assets/css/headers.css" rel="stylesheet">
+    <link href="{{ asset('assets/css/blog.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/headers.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -114,7 +32,8 @@
         <header class="blog-header lh-1 pt-3 mb-3">
             <nav class="navbar navbar-expand-lg">
                 <div class="container-fluid">
-                    <a class="navbar-brand blog-header-logo text-body-emphasis" href="/">Bim Blog</a>
+                    <a class="navbar-brand blog-header-logo text-body-emphasis" href="{{ route('post.index') }}">Bim
+                        Blog</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -123,14 +42,12 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto">
                             <li class="nav-item">
-                                <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" href="/">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link {{ Request::is('posts') ? 'active' : '' }}" href="/posts">Blog</a>
+                                <a class="nav-link {{ Request::is('/') ? 'active' : '' }}"
+                                    href="{{ route('post.index') }}">Blog</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ Request::is('categories') ? 'active' : '' }}"
-                                    href="/categories">Categories</a>
+                                    href="{{ route('category.index') }}">Categories</a>
                             </li>
                             @auth
                                 <li class="nav-item dropdown">
@@ -140,12 +57,12 @@
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <li><a class="dropdown-item {{ Request::is('dashboard') ? 'active' : '' }}"
-                                                href="/dashboard">Posts</a></li>
+                                                href="{{ route('dashboard.index') }}">Posts</a></li>
                                         <li>
                                             <hr class="dropdown-divider">
                                         </li>
                                         <li><a class="dropdown-item {{ Request::is('dashboard/posts*') ? 'active' : '' }}"
-                                                href="/dashboard/posts">My Posts</a></li>
+                                                href="{{ route('posts.index') }}">My Posts</a></li>
                                     </ul>
                                 </li>
                             @endauth
@@ -157,7 +74,7 @@
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <li><a class="dropdown-item {{ Request::is('dashboard/categories*') ? 'active' : '' }}"
-                                                href="/dashboard/categories">Post Categories</a></li>
+                                                href="{{ route('categories.index') }}">Post Categories</a></li>
                                         <li>
                                     </ul>
                                 </li>
@@ -168,7 +85,7 @@
                                 </li>
                             @endauth
                         </ul>
-                        <form action="/posts" class="d-flex" role="search">
+                        <form action="{{ route('post.index') }}" class="d-flex" role="search">
                             @if (request('category'))
                                 <input type="hidden" name="category" value="{{ request('category') }}">
                             @endif
@@ -179,12 +96,12 @@
                                 value="{{ request('search') }}">
                         </form>
                         @auth
-                            <form action="/logout" method="post">
+                            <form action="{{ route('logout') }}" method="post">
                                 @csrf
                                 <button type="submit" class="btn btn-primary mb-2">Logout</button>
                             </form>
                         @else
-                            <a class="btn btn-primary mb-2" href="/login">Login</a>
+                            <a class="btn btn-primary mb-2" href="{{ route('login.index') }}">Login</a>
                         @endauth
                     </div>
                 </div>

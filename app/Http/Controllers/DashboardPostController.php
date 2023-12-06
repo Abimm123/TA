@@ -58,7 +58,7 @@ class DashboardPostController extends Controller
 
         Post::create($validatedData);
 
-        return redirect('/dashboard/posts')->with('success', 'New post has been added');
+        return redirect()->route('posts.index')->with('success', 'New post has been added');
     }
 
     /**
@@ -114,7 +114,7 @@ class DashboardPostController extends Controller
 
         Post::where('id', $post->id)->update($validatedData);
 
-        return redirect('/dashboard/posts')->with('success', 'Post has been updated');
+        return redirect()->route('posts.index')->with('success', 'Post has been updated');
     }
 
     /**
@@ -128,7 +128,7 @@ class DashboardPostController extends Controller
 
         Post::destroy($post->id);
 
-        return redirect('/dashboard/posts')->with('success', 'Post has been deleted');
+        return redirect()->route('posts.index')->with('success', 'Post has been deleted');
     }
 
     public function checkSlug(Request $request)

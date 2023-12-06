@@ -17,12 +17,12 @@ class PostController extends Controller
     {
         $title = '';
         if (request('category')) {
-            $category = Category::firstWhere('slug', request('category'));
+            $category = Category::firstWhere('slug', request('category'))->paginate(7);
             $title = ' in ' . $category->name;
         }
 
         if (request('author')) {
-            $author = User::firstWhere('username', request('author'));
+            $author = User::firstWhere('username', request('author'))->paginate(7);
             $title = ' by ' . $author->name;
         }
 

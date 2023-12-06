@@ -6,6 +6,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
 
+
 class AdminCategoryController extends Controller
 {
     /**
@@ -43,7 +44,7 @@ class AdminCategoryController extends Controller
 
         Category::create($validatedData);
 
-        return redirect('/dashboard/categories')->with('success', 'New category has been added');
+        return redirect()->route('categories.index')->with('success', 'New category has been added');
     }
 
     /**
@@ -77,7 +78,7 @@ class AdminCategoryController extends Controller
     {
         Category::destroy($category->id);
 
-        return redirect('/dashboard/categories')->with('success', 'Category has been deleted');
+        return redirect()->route('categories.index')->with('success', 'Category has been deleted');
     }
 
     public function checkSlug(Request $request)
